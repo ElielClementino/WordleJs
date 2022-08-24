@@ -1,8 +1,9 @@
+import { chooseDifferentWordEachDay } from './wordsOfTheDay.js';
 const tile = document.querySelector('.tile_container')
 const keyboard = document.querySelector('.key_container')
 const keyboard_keys = ['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','ENTER','Z','X','C','V','B','N','M','BACKSPACE',]
 const messageDisplay = document.querySelector('.message_container')
-const wordOfTheDay = 'PORCO'
+const wordOfTheDay = chooseDifferentWordEachDay().normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase()
 
 const tilesRow = [
     ['', '', '', '', ''],
@@ -16,6 +17,7 @@ const tilesRow = [
 let currentRow = 0
 let currentTile = 0
 let endgame = false
+
 
 tilesRow.forEach((tilesRow, tilesRowIndex) => {
     const rowElement = document.createElement('div')
@@ -75,6 +77,7 @@ const checkRow = async () =>{
     const guess = tilesRow[currentRow].join('')
     if(currentTile > 4){
         flipTile()
+        
         if(guess == wordOfTheDay){
             showMessage('Parabéns você acertou')
             endgame == true
