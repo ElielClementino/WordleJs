@@ -4,6 +4,7 @@ const keyboard = document.querySelector('.key_container')
 const keyboard_keys = ['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','ENTER','Z','X','C','V','B','N','M','BACKSPACE',]
 const messageDisplay = document.querySelector('.message_container')
 const wordOfTheDay = chooseDifferentWordEachDay().normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase()
+const body = document.querySelector('body')
 
 const tilesRow = [
     ['', '', '', '', ''],
@@ -40,6 +41,32 @@ keyboard_keys.forEach(key =>{
     keyboard.append(button)
 })
 
+const listener = event =>{
+    let letter = event.key.toUpperCase()
+    tilesRow.push(letter)
+    validar(letter)
+}
+
+
+
+const validar = letter =>{
+    if(letter == 'ENTER'){
+    checkRow()
+    return    
+    }
+    if(letter == 'BACKSPACE' || letter == ''){
+        deleteLetter()
+        return 
+    }
+    if(!keyboard_keys.includes(letter)){
+        return 
+    }
+    addLetter(letter)
+}
+
+
+body.addEventListener('keydown', listener)
+
 const getButtonClick = (letter) =>{
     if(letter === 'BACKSPACE'){
         deleteLetter()
@@ -50,7 +77,6 @@ const getButtonClick = (letter) =>{
         return
     }
     addLetter(letter)
-    console.log(letter)
 }
 
 const addLetter = (letter) =>{
