@@ -103,7 +103,9 @@ const checkRow = async () =>{
     const guess = tilesRow[currentRow].join('')
     if(currentTile > 4){
         flipTile()
-        
+        if(wordOfTheDay.includes(guess)){
+            alert('eliel')
+        }
         if(guess == wordOfTheDay){
             showMessage('Parabéns você acertou')
             endgame == true
