@@ -332,7 +332,7 @@ let wordsDict ={
 
 export const chooseDifferentWordEachDay = () => {
     let today = new Date()
-    today.setDate(today.getDate()+3)
+    today.setDate(today.getDate())
     let dia = today.getUTCDate()
     let mes = today.getUTCMonth()
     let ano = today.getUTCFullYear()
